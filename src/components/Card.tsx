@@ -1,6 +1,6 @@
 import React from 'react'
 
-import IComment, { IReplies } from '../models/commentModel'
+import IComment, { IReplies } from '../@types/comment'
 
 interface props {
   comment: IComment | IReplies
@@ -8,7 +8,7 @@ interface props {
   // replies: IReplies
 }
 
-const Card: React.FC<props> = ({ comment, isReply }) => {
+const Card = ({ comment, isReply }: props) => {
   let replyUser
 
   if ('replyingTo' in comment) {

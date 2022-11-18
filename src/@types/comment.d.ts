@@ -1,4 +1,4 @@
-import IUser from './userModel'
+import IUser from './user'
 
 export interface IReplies {
   id: number
@@ -7,6 +7,10 @@ export interface IReplies {
   score: number
   replyingTo: string
   user: IUser
+}
+
+export interface ICommentContext {
+  comments: IComment[]
 }
 
 export default interface IComment {

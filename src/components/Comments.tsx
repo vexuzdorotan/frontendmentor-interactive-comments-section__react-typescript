@@ -1,15 +1,9 @@
-import React, { useState } from 'react'
+import React from 'react'
 
-import commentsAPI from '../shared/api/comments'
-import IComment, { IReplies } from '../models/commentModel'
+import IComment, { IReplies, ICommentContext } from '../@types/comment'
+import { useContextComments } from '../contexts/CommentsContext'
 
 import Card from './Card'
-
-interface props {
-  comments: Array<IComment>
-  setComments: React.Dispatch<React.SetStateAction<IComment[]>>
-  // replies: Array<IReplies>
-}
 
 const cardsReplies = (replies: IReplies[]) => {
   return replies.map((reply) => {
@@ -28,8 +22,8 @@ const cardsComments = (comments: IComment[]) => {
   })
 }
 
-const Comments: React.FC = () => {
-  const [comments, setComments] = useState<Array<IComment>>(commentsAPI)
+const Comments = () => {
+  const { comments } = useContextComments() as ICommentContext
 
   return <>{cardsComments(comments)}</>
 }

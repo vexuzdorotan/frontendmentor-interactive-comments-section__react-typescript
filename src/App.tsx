@@ -1,16 +1,15 @@
-import React, { useState } from 'react'
-
 import './App.css'
 
-import currentUserAPI from './shared/api/currentUser'
-
+import { CommentsProvider } from './contexts/CommentsContext'
 import Comments from './components/Comments'
 
-const App: React.FC = () => {
+const App = () => {
   return (
-    <div className='min-h-screen bg-neutralVeryLightGray'>
-      <Comments />
-    </div>
+    <CommentsProvider>
+      <div className='min-h-screen bg-neutralVeryLightGray'>
+        <Comments />
+      </div>
+    </CommentsProvider>
   )
 }
 
