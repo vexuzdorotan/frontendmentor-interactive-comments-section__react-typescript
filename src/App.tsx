@@ -1,15 +1,18 @@
 import './App.css'
 
 import { CommentsProvider } from './contexts/CommentsContext'
+import { UserProvider } from './contexts/UserContext'
 import Comments from './components/Comments'
 
 const App = () => {
   return (
-    <CommentsProvider>
-      <div className='min-h-screen bg-neutralVeryLightGray'>
-        <Comments />
-      </div>
-    </CommentsProvider>
+    <UserProvider>
+      <CommentsProvider>
+        <div className='min-h-screen bg-neutralVeryLightGray'>
+          <Comments />
+        </div>
+      </CommentsProvider>
+    </UserProvider>
   )
 }
 

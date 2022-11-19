@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 
 import IComment, { IReplies, ICommentContext } from '../@types/comment'
 import { useContextComments } from '../contexts/CommentsContext'
@@ -14,10 +14,10 @@ const cardsReplies = (replies: IReplies[]) => {
 const cardsComments = (comments: IComment[]) => {
   return comments.map((comment) => {
     return (
-      <>
-        <Card key={comment.id} comment={comment} isReply={false} />
+      <Fragment key={comment.id}>
+        <Card comment={comment} isReply={false} />
         {comment.replies.length !== 0 && cardsReplies(comment.replies)}
-      </>
+      </Fragment>
     )
   })
 }
