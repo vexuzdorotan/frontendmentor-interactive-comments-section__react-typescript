@@ -25,10 +25,10 @@ const Card = ({ comment, isReply }: props) => {
     <div
       className={`grid grid-cols-2 bg-neutralWhite m-4 p-4 ${
         isReply && 'ml-12'
-      }`}
+      } md:grid-cols-[70px_auto_100px] md:grid-rows-3`}
     >
       {/* user */}
-      <div className='col-span-2 flex justify-between items-center mb-4 mr-8'>
+      <div className='col-span-2 flex justify-start items-center gap-x-4 mb-4 mr-8 md:col-start-2 md:col-end-3 md:mb-0'>
         <img
           src={comment.user.image.png}
           alt={comment.user.username}
@@ -45,7 +45,7 @@ const Card = ({ comment, isReply }: props) => {
       </div>
 
       {/* content */}
-      <p className='col-span-2 text-neutralGrayishBlue mb-4'>
+      <p className='col-span-2 text-neutralGrayishBlue mb-4 md:row-span-2 md:mt-2'>
         {replyUser && (
           <span className='text-primaryModerateBlue font-bold'>
             {replyUser}
@@ -55,7 +55,7 @@ const Card = ({ comment, isReply }: props) => {
       </p>
 
       {/* score */}
-      <div className='col-span-1 flex flex-row items-center justify-around bg-neutralVeryLightGray text-lg font-medium w-24 h-10 rounded-md lg:flex-col'>
+      <div className='col-span-1 flex flex-row items-center justify-around bg-neutralVeryLightGray text-lg font-medium w-24 h-10 rounded-md md:flex-col md:order-first md:row-span-3 md:w-10 md:h-24'>
         <button className='text-neutral-400 hover:text-primaryModerateBlue'>
           +
         </button>
@@ -66,10 +66,9 @@ const Card = ({ comment, isReply }: props) => {
       </div>
 
       {/* modify */}
-      <div className='col-span-1 flex flex-row items-center justify-around text-lg font-medium h-10 rounded-md lg:flex-col'>
+      <div className='col-span-1 flex flex-row items-center justify-end text-lg gap-4 font-medium h-10 rounded-md md:col-end-4 md:row-start-1'>
         {comment.user.username === username ? (
           <>
-            {' '}
             <button className='text-primarySoftRed'>
               <span className='flex items-center'>
                 <MdDelete /> Delete
