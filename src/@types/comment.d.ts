@@ -1,3 +1,5 @@
+import { Dispatch } from 'react'
+
 import IUser from './user'
 
 export interface IReplies {
@@ -11,6 +13,7 @@ export interface IReplies {
 
 export interface ICommentContext {
   comments: IComment[]
+  dispatch: Dispatch
 }
 
 export default interface IComment {

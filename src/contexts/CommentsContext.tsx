@@ -8,7 +8,9 @@ interface CommentsProviderProps {
   children: React.ReactNode
 }
 
-export const CommentsContext = createContext<ICommentContext | null>(null)
+export const CommentsContext = createContext<ICommentContext>(
+  {} as ICommentContext
+)
 
 export const CommentsProvider = ({ children }: CommentsProviderProps) => {
   const [comments, dispatch] = useReducer(commentsReducer, commentsAPI)
@@ -20,8 +22,10 @@ export const CommentsProvider = ({ children }: CommentsProviderProps) => {
   //   })
   // }
 
+  const value = { comments, dispatch }
+
   return (
-    <CommentsContext.Provider value={{ comments }}>
+    <CommentsContext.Provider value={value}>
       {children}
     </CommentsContext.Provider>
   )
