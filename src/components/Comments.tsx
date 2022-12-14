@@ -4,6 +4,7 @@ import IComment, { IReplies, ICommentContext } from '../@types/comment'
 import { useContextComments } from '../contexts/CommentsContext'
 
 import Card from './Card'
+import AddComment from './AddComment'
 
 const cardsReplies = (replies: IReplies[]) => {
   return replies.map((reply) => {
@@ -25,7 +26,12 @@ const cardsComments = (comments: IComment[]) => {
 const Comments = () => {
   const { comments } = useContextComments() as ICommentContext
 
-  return <>{cardsComments(comments)}</>
+  return (
+    <>
+      {cardsComments(comments)}
+      <AddComment />
+    </>
+  )
 }
 
 export default Comments

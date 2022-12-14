@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { MdDelete, MdEdit } from 'react-icons/md'
 import { FaReply } from 'react-icons/fa'
 import ReactModal from 'react-modal'
+import { DateTime } from 'luxon'
 
 import IUser from '../@types/user'
 import IComment, { IReplies } from '../@types/comment'
@@ -9,6 +10,7 @@ import IComment, { IReplies } from '../@types/comment'
 import { useContextUser } from '../contexts/UserContext'
 import { useContextComments } from '../contexts/CommentsContext'
 
+import TextArea from './TextArea'
 import Button from './Button'
 
 interface props {
@@ -36,29 +38,32 @@ const Card = ({ comment, isReply }: props) => {
   const { username } = useContextUser() as IUser
   const { dispatch } = useContextComments()
 
+  let replyUser: string = ''
+
+  if ('replyingTo' in comment && isReply) {
+    replyUser = `@${comment.replyingTo} `
+  }
+
   const [modalIsOpen, setIsOpen] = useState(false)
+  const [isEdit, setIsEdit] = useState(false)
+  const [editContent, setEditContent] = useState(replyUser)
 
   const openModal = () => setIsOpen(true)
-
   const closeModal = () => setIsOpen(false)
-
-  const handleOnSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-  }
 
   const handleDelete = async () => {
     dispatch({
       type: 'DELETE_COMMENT',
-      payload: 1,
+      payload: comment.id,
     })
 
     closeModal()
   }
 
-  let replyUser
+  const convertTimeToRelative = (createdAt: string) => {
+    const pastDate = DateTime.fromISO(createdAt)
 
-  if ('replyingTo' in comment) {
-    replyUser = isReply && `@${comment.replyingTo} `
+    return pastDate.toRelative()
   }
 
   return (
@@ -83,10 +88,7 @@ const Card = ({ comment, isReply }: props) => {
           comment and can't be undone.
         </p>
 
-        <form
-          className='flex justify-between'
-          onSubmit={(e) => handleOnSubmit(e)}
-        >
+        <div className='flex justify-between'>
           <Button
             innerText='NO, CANCEL'
             bgColor='bg-neutralGrayishBlue'
@@ -97,7 +99,7 @@ const Card = ({ comment, isReply }: props) => {
             bgColor='bg-primarySoftRed'
             onClick={handleDelete}
           />
-        </form>
+        </div>
       </ReactModal>
 
       {/* user */}
@@ -114,18 +116,24 @@ const Card = ({ comment, isReply }: props) => {
           </div>
         )}
 
-        <p className='text-neutralGrayishBlue'>{comment.createdAt}</p>
+        <p className='text-neutralGrayishBlue'>
+          {convertTimeToRelative(comment.createdAt)}
+        </p>
       </div>
 
       {/* content */}
-      <p className='col-span-2 text-neutralGrayishBlue mb-4 md:row-span-2 md:mt-2'>
-        {replyUser && (
-          <span className='text-primaryModerateBlue font-bold'>
-            {replyUser}
-          </span>
-        )}
-        {comment.content}
-      </p>
+      {isEdit ? (
+        <TextArea content={editContent} setContent={setEditContent} />
+      ) : (
+        <p className='col-span-2 text-neutralGrayishBlue mb-4 md:row-span-2 md:mt-2'>
+          {replyUser && (
+            <span className='text-primaryModerateBlue font-bold'>
+              {replyUser}
+            </span>
+          )}
+          <span>{comment.content}</span>
+        </p>
+      )}
 
       {/* score */}
       <div className='col-span-1 flex flex-row items-center justify-around bg-neutralVeryLightGray text-lg font-medium w-24 h-10 rounded-md md:flex-col md:order-first md:row-span-3 md:w-10 md:h-24'>
@@ -147,7 +155,10 @@ const Card = ({ comment, isReply }: props) => {
                 <MdDelete /> Delete
               </span>
             </button>
-            <button className='text-primaryModerateBlue'>
+            <button
+              className='text-primaryModerateBlue'
+              onClick={() => setIsEdit(true)}
+            >
               <span className='flex items-center'>
                 <MdEdit /> Edit
               </span>
