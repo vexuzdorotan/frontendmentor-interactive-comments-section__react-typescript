@@ -14,9 +14,9 @@ import TextArea from './TextArea'
 import Button from './Button'
 
 interface props {
+  parentId?: number
   comment: IComment | IReplies
   isReply: boolean
-  // replies: IReplies
 }
 
 const customStyles = {
@@ -40,24 +40,37 @@ const Card = ({ comment, isReply }: props) => {
 
   let replyUser: string = ''
 
-  if ('replyingTo' in comment && isReply) {
-    replyUser = `@${comment.replyingTo} `
-  }
+  if ('replyingTo' in comment && isReply) replyUser = `@${comment.replyingTo} `
 
   const [modalIsOpen, setIsOpen] = useState(false)
   const [isEdit, setIsEdit] = useState(false)
-  const [editContent, setEditContent] = useState(replyUser)
+  const [editedContent, setEditedContent] = useState(
+    `${replyUser} ${comment.content}`
+  )
 
   const openModal = () => setIsOpen(true)
   const closeModal = () => setIsOpen(false)
 
+  const handleUpdate = async () => {
+    dispatch({
+      type: 'UPDATE_COMMENT',
+      payload: { id: comment.id, content: editedContent },
+    })
+
+    setIsEdit(false)
+  }
+
   const handleDelete = async () => {
     dispatch({
       type: 'DELETE_COMMENT',
-      payload: comment.id,
+      payload: { id: comment.id },
     })
 
     closeModal()
+  }
+
+  const handleReply = () => {
+    alert('test')
   }
 
   const convertTimeToRelative = (createdAt: string) => {
@@ -70,38 +83,8 @@ const Card = ({ comment, isReply }: props) => {
     <div
       className={`grid grid-cols-2 bg-neutralWhite m-4 p-4 ${
         isReply && 'ml-12'
-      } md:grid-cols-[70px_auto_100px] md:grid-rows-3`}
+      } md:grid-cols-[70px_auto_100px] md:auto_auto_auto`}
     >
-      <ReactModal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel='Delete Modal'
-        ariaHideApp={false}
-      >
-        <h1 className='text-xl font-semibold text-neutralDarkBlue mb-4'>
-          Delete comment
-        </h1>
-
-        <p className='text-neutralDarkBlue mb-4'>
-          Are you sure you want to delete this comment? This will remove the
-          comment and can't be undone.
-        </p>
-
-        <div className='flex justify-between'>
-          <Button
-            innerText='NO, CANCEL'
-            bgColor='bg-neutralGrayishBlue'
-            onClick={closeModal}
-          />
-          <Button
-            innerText='YES, DELETE'
-            bgColor='bg-primarySoftRed'
-            onClick={handleDelete}
-          />
-        </div>
-      </ReactModal>
-
       {/* user */}
       <div className='col-span-2 flex justify-start items-center gap-x-4 mb-4 mr-8 md:col-start-2 md:col-end-3 md:mb-0'>
         <img
@@ -123,7 +106,9 @@ const Card = ({ comment, isReply }: props) => {
 
       {/* content */}
       {isEdit ? (
-        <TextArea content={editContent} setContent={setEditContent} />
+        <div className='flex flex-col col-span-2  md:mt-4'>
+          <TextArea content={editedContent} setContent={setEditedContent} />
+        </div>
       ) : (
         <p className='col-span-2 text-neutralGrayishBlue mb-4 md:row-span-2 md:mt-2'>
           {replyUser && (
@@ -147,7 +132,11 @@ const Card = ({ comment, isReply }: props) => {
       </div>
 
       {/* modify */}
-      <div className='col-span-1 flex flex-row items-center justify-end text-lg gap-4 font-medium h-10 rounded-md md:col-end-4 md:row-start-1'>
+      <div
+        className={`${
+          isEdit ? 'hidden ' : ''
+        }col-span-1 flex flex-row items-center justify-end text-lg gap-4 font-medium h-10 rounded-md md:col-end-4 md:row-start-1`}
+      >
         {comment.user.username === username ? (
           <>
             <button className='text-primarySoftRed' onClick={openModal}>
@@ -165,13 +154,56 @@ const Card = ({ comment, isReply }: props) => {
             </button>
           </>
         ) : (
-          <button className='text-primaryModerateBlue'>
+          <button className='text-primaryModerateBlue' onClick={handleReply}>
             <span className='flex items-center'>
               <FaReply className='mr-2' /> Reply
             </span>
           </button>
         )}
       </div>
+
+      {isEdit && (
+        <div className='col-span-1 flex items-center justify-end md:col-end-4'>
+          <Button
+            bgColor='bg-primaryModerateBlue'
+            innerText='UPDATE'
+            customClassName='w-0 ml-auto'
+            onClick={handleUpdate}
+          />
+        </div>
+      )}
+
+      {modalIsOpen && (
+        <ReactModal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel='Delete Modal'
+          ariaHideApp={false}
+        >
+          <h1 className='text-xl font-semibold text-neutralDarkBlue mb-4'>
+            Delete comment
+          </h1>
+
+          <p className='text-neutralDarkBlue mb-4'>
+            Are you sure you want to delete this comment? This will remove the
+            comment and can't be undone.
+          </p>
+
+          <div className='flex justify-between'>
+            <Button
+              innerText='NO, CANCEL'
+              bgColor='bg-neutralGrayishBlue'
+              onClick={closeModal}
+            />
+            <Button
+              innerText='YES, DELETE'
+              bgColor='bg-primarySoftRed'
+              onClick={handleDelete}
+            />
+          </div>
+        </ReactModal>
+      )}
     </div>
   )
 }

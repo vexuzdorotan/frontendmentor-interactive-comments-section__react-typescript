@@ -19,8 +19,6 @@ const AddComment = () => {
   const user = { image, username }
   const now = DateTime.now().toString()
 
-  console.log(now)
-
   const handleAddComment = () => {
     const payload = {
       id,
@@ -45,7 +43,11 @@ const AddComment = () => {
         placeholder='Add a comment...'
       ></textarea> */}
 
-      <TextArea content={content} setContent={setContent} />
+      <TextArea
+        content={content}
+        setContent={setContent}
+        customClass='md:mx-4'
+      />
 
       <img src={image.png} alt={username} className='h-8 md:order-first' />
       <Button
