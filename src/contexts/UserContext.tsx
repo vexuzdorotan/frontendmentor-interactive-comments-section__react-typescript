@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useReducer } from 'react'
+import React, { createContext, useContext } from 'react'
 
 import IUser from '../@types/user'
 import userAPI from '../shared/api/currentUser'
