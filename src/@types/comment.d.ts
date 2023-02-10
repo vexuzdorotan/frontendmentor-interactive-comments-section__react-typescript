@@ -13,6 +13,7 @@ export interface IReplies {
 
 export interface ICommentContext {
   comments: IComment[]
+  currentReplyId: number | null
   dispatch: Dispatch
 }
 

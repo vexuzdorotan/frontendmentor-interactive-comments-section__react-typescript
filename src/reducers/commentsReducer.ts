@@ -1,75 +1,124 @@
 import IComment from '../@types/comment'
 
+interface IState {
+  comments: IComment[]
+  currentReplyId: number | null
+}
 interface ACTION_TYPE {
   type: string
   payload: any
 }
 
-const commentsReducer = (comments: IComment[], action: ACTION_TYPE) => {
-  // const recursiveUpdateComment = (
-  //   comments: IComment[],
-  //   id: number,
-  //   newContent: string
-  // ) => {
-  //   return comments.map((comment): IComment => {
-  //     if (comment.id === id) {
-  //       return { ...comment, content: newContent }
-  //     } else if (comment.replies) {
-  //       const replies: any = comment.replies
-  //       return {
-  //         ...comment,
-  //         replies: recursiveUpdateComment(replies, id, newContent),
-  //       }
-  //     }
-
-  //     return comment
-  //   })
-  // }
-
+const commentsReducer = (state: IState, action: ACTION_TYPE) => {
   switch (action.type) {
-    case 'ADD_COMMENT':
-      return [...comments, action.payload]
-    case 'DELETE_COMMENT':
-      return comments
-        .filter((comment) => comment.id !== action.payload.id)
-        .map((comment) => {
-          return {
-            ...comment,
-            replies: comment.replies.filter(
-              (reply) => reply.id !== action.payload.id
-            ),
-          }
-        })
-    case 'UPDATE_COMMENT':
-      // return recursiveUpdateComment(
-      //   comments,
-      //   action.payload.id,
-      //   action.payload.content
-      // )
-
-      return comments.map((comment) => {
-        if (comment.id === action.payload.id) {
-          return {
-            ...comment,
-            content: action.payload.content,
-          }
-        } else {
-          return {
-            ...comment,
-            replies: comment.replies.map((reply) => {
-              if (reply.id === action.payload.id) {
-                return {
-                  ...reply,
-                  content: action.payload.content,
+    case 'UPVOTE': {
+      return {
+        ...state,
+        comments: state.comments.map((comment) => {
+          if (comment.id === action.payload.id) {
+            return {
+              ...comment,
+              score: comment.score++,
+            }
+          } else {
+            return {
+              ...comment,
+              replies: comment.replies.map((reply) => {
+                if (reply.id === action.payload.id) {
+                  return {
+                    ...reply,
+                    score: reply.score++,
+                  }
                 }
-              }
-              return reply
-            }),
+                return reply
+              }),
+            }
           }
-        }
-      })
-    default:
-      return comments
+        }),
+      }
+    }
+    case 'DOWNVOTE': {
+      return {
+        ...state,
+        comments: state.comments.map((comment) => {
+          if (comment.id === action.payload.id) {
+            return {
+              ...comment,
+              score: comment.score--,
+            }
+          } else {
+            return {
+              ...comment,
+              replies: comment.replies.map((reply) => {
+                if (reply.id === action.payload.id) {
+                  return {
+                    ...reply,
+                    score: reply.score--,
+                  }
+                }
+                return reply
+              }),
+            }
+          }
+        }),
+      }
+    }
+    case 'REPLY': {
+      return {
+        ...state,
+        currentReplyId: action.payload.id,
+      }
+    }
+    case 'ADD_COMMENT': {
+      return {
+        ...state,
+        comments: [...state.comments, action.payload],
+      }
+    }
+    case 'UPDATE_COMMENT': {
+      return {
+        ...state,
+        comments: state.comments.map((comment) => {
+          if (comment.id === action.payload.id) {
+            return {
+              ...comment,
+              content: action.payload.content,
+            }
+          } else {
+            return {
+              ...comment,
+              replies: comment.replies.map((reply) => {
+                if (reply.id === action.payload.id) {
+                  return {
+                    ...reply,
+                    content: action.payload.content,
+                  }
+                }
+                return reply
+              }),
+            }
+          }
+        }),
+      }
+    }
+    case 'DELETE_COMMENT': {
+      return {
+        ...state,
+        comments: state.comments
+          .filter((comment) => comment.id !== action.payload.id)
+          .map((comment) => {
+            return {
+              ...comment,
+              replies: comment.replies.filter(
+                (reply) => reply.id !== action.payload.id
+              ),
+            }
+          }),
+      }
+    }
+    default: {
+      return state
+    }
   }
 }
 

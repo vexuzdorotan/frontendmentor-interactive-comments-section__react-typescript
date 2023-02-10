@@ -12,13 +12,13 @@ import Score from './Score'
 import ModifyOrReply from './ModifyOrReply'
 import Button from './Button'
 
-interface props {
+interface Props {
   parentId?: number
   comment: IComment | IReplies
   isReply: boolean
 }
 
-const Card = ({ comment, isReply }: props) => {
+const Card = ({ comment, isReply }: Props) => {
   const { username } = useContextUser() as IUser
   const { dispatch } = useContextComments()
 
@@ -38,10 +38,6 @@ const Card = ({ comment, isReply }: props) => {
     })
 
     setIsEdit(false)
-  }
-
-  const handleReply = () => {
-    alert('test')
   }
 
   return (
@@ -67,7 +63,6 @@ const Card = ({ comment, isReply }: props) => {
         username={username}
         isEdit={isEdit}
         setIsEdit={setIsEdit}
-        handleReply={handleReply}
       />
 
       {isEdit && (
@@ -75,8 +70,9 @@ const Card = ({ comment, isReply }: props) => {
           <Button
             bgColor='bg-primaryModerateBlue'
             innerText='UPDATE'
-            customClassName='w-0 ml-auto'
+            customClassName={`w-0 ml-auto${!editedContent ? 'opacity-30' : ''}`}
             onClick={handleUpdate}
+            disabled={!editedContent}
           />
         </div>
       )}

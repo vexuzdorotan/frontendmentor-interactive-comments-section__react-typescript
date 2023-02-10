@@ -53,8 +53,9 @@ const AddComment = () => {
       <Button
         bgColor='bg-primaryModerateBlue'
         innerText='SEND'
-        customClassName='ml-auto'
+        customClassName={`ml-auto${!content ? ' opacity-30' : ''}`}
         onClick={handleAddComment}
+        disabled={!content}
       />
     </div>
   )

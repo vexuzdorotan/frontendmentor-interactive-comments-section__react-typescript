@@ -14,7 +14,6 @@ interface props {
   username: string
   isEdit: boolean
   setIsEdit: React.Dispatch<React.SetStateAction<boolean>>
-  handleReply: () => void
 }
 
 const customStyles = {
@@ -32,13 +31,7 @@ const customStyles = {
   },
 }
 
-const ModifyOrReply = ({
-  comment,
-  username,
-  isEdit,
-  setIsEdit,
-  handleReply,
-}: props) => {
+const ModifyOrReply = ({ comment, username, isEdit, setIsEdit }: props) => {
   const { dispatch } = useContextComments()
 
   const [isOpen, setIsOpen] = useState(false)
@@ -53,6 +46,13 @@ const ModifyOrReply = ({
     })
 
     closeModal()
+  }
+
+  const handleReply = () => {
+    dispatch({
+      type: 'REPLY',
+      payload: { id: comment.id },
+    })
   }
 
   return (
