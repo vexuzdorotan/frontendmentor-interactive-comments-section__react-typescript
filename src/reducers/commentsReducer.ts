@@ -72,8 +72,19 @@ const commentsReducer = (state: IState, action: ACTION_TYPE) => {
     case 'ADD_COMMENT': {
       return {
         ...state,
-        comments: [...state.comments, action.payload],
+        comments: [...state.comments, action.payload.commentData],
       }
+    }
+    case 'ADD_REPLY': {
+      const newState = { ...state }
+
+      const parentIndex = newState.comments.findIndex(
+        (comment) => comment.id === action.payload.parentId
+      )
+
+      newState.comments[parentIndex].replies.push(action.payload.commentData)
+
+      return newState
     }
     case 'UPDATE_COMMENT': {
       return {

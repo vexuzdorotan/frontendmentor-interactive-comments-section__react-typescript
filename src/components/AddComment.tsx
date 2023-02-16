@@ -9,40 +9,69 @@ import IUser from '../@types/user'
 import TextArea from './TextArea'
 import Button from './Button'
 
-const AddComment = () => {
+interface Props {
+  type?: string
+  parentId?: number | null
+  replyingTo?: string
+}
+
+const AddComment = ({
+  type = 'ADD_COMMENT',
+  parentId = null,
+  replyingTo,
+}: Props) => {
   const [content, setContent] = useState('')
 
   const { dispatch } = useContextComments()
-  const { image, username } = useContextUser() as IUser
+
+  const user = useContextUser() as IUser
+  const { image, username } = user
 
   const id = v4()
-  const user = { image, username }
   const now = DateTime.now().toString()
 
   const handleAddComment = () => {
-    const payload = {
-      id,
-      content: content,
-      createdAt: now,
-      score: 0,
-      user,
-      replies: [],
+    if (type === 'ADD_COMMENT') {
+      const commentData = {
+        id,
+        content: content,
+        createdAt: now,
+        score: 0,
+        user,
+        replies: [],
+      }
+
+      const payload = {
+        commentData,
+      }
+
+      dispatch({ type, payload })
     }
 
-    dispatch({ type: 'ADD_COMMENT', payload })
+    if (type === 'ADD_REPLY') {
+      const commentData = {
+        id,
+        content: content,
+        createdAt: now,
+        score: 0,
+        replyingTo,
+        user,
+      }
+
+      const payload = {
+        type,
+        parentId,
+        commentData,
+      }
+
+      dispatch({ type, payload })
+    }
+
     setContent('')
   }
 
   return (
     <div className='grid grid-cols-2  md:grid-cols-[32px_auto_100px] items-center md:items-start bg-neutralWhite m-4 p-4 mt-4'>
-      {/* <textarea
-        className='col-span-2 md:col-span-1 resize-none outline-neutralGrayishBlue text-neutralDarkBlue  outline outline-1 rounded-lg px-6 py-4 mb-4 md:mx-4 placeholder:text-neutralGrayishBlue'
-        value={content}
-        onChange={(e) => setContent(e.target.value)}
-        rows={3}
-        placeholder='Add a comment...'
-      ></textarea> */}
-
       <TextArea
         content={content}
         setContent={setContent}

@@ -1,4 +1,4 @@
-import React from 'react'
+import { Fragment } from 'react'
 
 import { IReplies, ICommentContext } from '../@types/comment'
 import { useContextComments } from '../contexts/CommentsContext'
@@ -16,19 +16,23 @@ const Replies = ({ parentId, replies }: Props) => {
 
   return (
     <>
-      {replies.map((reply) => {
-        return (
-          <>
-            <Card
-              key={reply.id}
+      {replies.map((reply) => (
+        <Fragment key={reply.id}>
+          <Card
+            key={reply.id}
+            parentId={parentId}
+            comment={reply}
+            isReply={true}
+          />
+          {currentReplyId === reply.id && (
+            <AddComment
+              type='ADD_REPLY'
               parentId={parentId}
-              comment={reply}
-              isReply={true}
+              replyingTo={reply.user.username}
             />
-            {currentReplyId === reply.id && <AddComment />}
-          </>
-        )
-      })}
+          )}
+        </Fragment>
+      ))}
     </>
   )
 }

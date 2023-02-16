@@ -15,12 +15,19 @@ const Comments = () => {
       {comments.map((comment) => {
         const { id: parentId, replies } = comment
         const repliesLength = comment.replies.length
+        const replyingTo = comment.user.username
 
         return (
           <Fragment key={comment.id}>
             <Card comment={comment} isReply={false} />
 
-            {currentReplyId === comment.id && <AddComment />}
+            {currentReplyId === comment.id && (
+              <AddComment
+                type='ADD_REPLY'
+                parentId={parentId}
+                replyingTo={replyingTo}
+              />
+            )}
 
             {repliesLength !== 0 && (
               <Replies parentId={parentId} replies={replies} />
