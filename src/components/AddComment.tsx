@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { v4 } from 'uuid'
 import { DateTime } from 'luxon'
 
@@ -20,7 +20,9 @@ const AddComment = ({
   parentId = null,
   replyingTo,
 }: Props) => {
-  const [content, setContent] = useState('')
+  const initialContent = type === 'ADD_REPLY' ? `@${replyingTo} ` || '' : ''
+
+  const [content, setContent] = useState(initialContent)
 
   const { dispatch } = useContextComments()
 
@@ -51,7 +53,7 @@ const AddComment = ({
     if (type === 'ADD_REPLY') {
       const commentData = {
         id,
-        content: content,
+        content: content.replace(`@${replyingTo} `, '').trim(),
         createdAt: now,
         score: 0,
         replyingTo,
@@ -71,7 +73,11 @@ const AddComment = ({
   }
 
   return (
-    <div className='grid grid-cols-2  md:grid-cols-[32px_auto_100px] items-center md:items-start bg-neutralWhite m-4 p-4 mt-4'>
+    <div
+      className={`grid grid-cols-2 ${
+        type === 'ADD_REPLY' && 'ml-12'
+      } md:grid-cols-[32px_auto_100px] items-center md:items-start bg-neutralWhite m-4 p-4 mt-4`}
+    >
       <TextArea
         content={content}
         setContent={setContent}
@@ -80,8 +86,8 @@ const AddComment = ({
 
       <img src={image.png} alt={username} className='h-8 md:order-first' />
       <Button
-        bgColor='bg-primaryModerateBlue'
-        innerText='SEND'
+        bgColor='bg-primaryModerateBlue hover:opacity-30'
+        innerText={`${type === 'ADD_COMMENT' ? 'SEND' : 'REPLY'}`}
         customClassName={`ml-auto${!content ? ' opacity-30' : ''}`}
         onClick={handleAddComment}
         disabled={!content}

@@ -18,7 +18,7 @@ const commentsReducer = (state: IState, action: ACTION_TYPE) => {
           if (comment.id === action.payload.id) {
             return {
               ...comment,
-              score: comment.score++,
+              score: comment.score + 1,
             }
           } else {
             return {
@@ -27,7 +27,7 @@ const commentsReducer = (state: IState, action: ACTION_TYPE) => {
                 if (reply.id === action.payload.id) {
                   return {
                     ...reply,
-                    score: reply.score++,
+                    score: reply.score + 1,
                   }
                 }
                 return reply
@@ -44,7 +44,7 @@ const commentsReducer = (state: IState, action: ACTION_TYPE) => {
           if (comment.id === action.payload.id) {
             return {
               ...comment,
-              score: comment.score--,
+              score: comment.score - 1,
             }
           } else {
             return {
@@ -53,7 +53,7 @@ const commentsReducer = (state: IState, action: ACTION_TYPE) => {
                 if (reply.id === action.payload.id) {
                   return {
                     ...reply,
-                    score: reply.score--,
+                    score: reply.score - 1,
                   }
                 }
                 return reply
@@ -73,6 +73,7 @@ const commentsReducer = (state: IState, action: ACTION_TYPE) => {
       return {
         ...state,
         comments: [...state.comments, action.payload.commentData],
+        currentReplyId: null,
       }
     }
     case 'ADD_REPLY': {
@@ -83,6 +84,7 @@ const commentsReducer = (state: IState, action: ACTION_TYPE) => {
       )
 
       newState.comments[parentIndex].replies.push(action.payload.commentData)
+      newState.currentReplyId = null
 
       return newState
     }

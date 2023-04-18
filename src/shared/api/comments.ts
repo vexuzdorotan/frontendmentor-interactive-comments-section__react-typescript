@@ -1,9 +1,5 @@
 import data from '../../data/data.json'
 
-const fetchComments = () => {
-  // fetch API later
-
-  return data.comments
-}
+const fetchComments = () => data.comments
 
 export default fetchComments()

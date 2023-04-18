@@ -64,13 +64,16 @@ const ModifyOrReply = ({ comment, username, isEdit, setIsEdit }: props) => {
       >
         {comment.user.username === username ? (
           <>
-            <button className='text-primarySoftRed' onClick={openModal}>
+            <button
+              className='text-primarySoftRed hover:opacity-30'
+              onClick={openModal}
+            >
               <span className='flex items-center'>
                 <MdDelete /> Delete
               </span>
             </button>
             <button
-              className='text-primaryModerateBlue'
+              className='text-primaryModerateBlue hover:opacity-30'
               onClick={() => setIsEdit(true)}
             >
               <span className='flex items-center'>
@@ -79,7 +82,10 @@ const ModifyOrReply = ({ comment, username, isEdit, setIsEdit }: props) => {
             </button>
           </>
         ) : (
-          <button className='text-primaryModerateBlue' onClick={handleReply}>
+          <button
+            className='text-primaryModerateBlue hover:opacity-30'
+            onClick={handleReply}
+          >
             <span className='flex items-center'>
               <FaReply className='mr-2' /> Reply
             </span>

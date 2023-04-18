@@ -8,7 +8,7 @@ const App = () => {
   return (
     <UserProvider>
       <CommentsProvider>
-        <div className='min-h-screen bg-neutralVeryLightGray'>
+        <div className='min-h-screen py-4 bg-neutralVeryLightGray'>
           <Comments />
         </div>
       </CommentsProvider>

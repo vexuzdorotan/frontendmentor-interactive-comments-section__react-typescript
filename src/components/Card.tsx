@@ -34,7 +34,10 @@ const Card = ({ comment, isReply }: Props) => {
   const handleUpdate = async () => {
     dispatch({
       type: 'UPDATE_COMMENT',
-      payload: { id: comment.id, content: editedContent },
+      payload: {
+        id: comment.id,
+        content: editedContent.replace(replyUser, '').trim(),
+      },
     })
 
     setIsEdit(false)
@@ -42,7 +45,7 @@ const Card = ({ comment, isReply }: Props) => {
 
   return (
     <div
-      className={`grid grid-cols-2 bg-neutralWhite m-4 p-4 ${
+      className={`grid grid-cols-2 bg-neutralWhite mx-4 mb-4 p-4 ${
         isReply && 'ml-12'
       } md:grid-cols-[70px_auto_100px] md:auto_auto_auto`}
     >

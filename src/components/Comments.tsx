@@ -1,6 +1,6 @@
 import { Fragment } from 'react'
 
-import { IReplies, ICommentContext } from '../@types/comment'
+import { ICommentContext } from '../@types/comment'
 import { useContextComments } from '../contexts/CommentsContext'
 
 import Card from './Card'
