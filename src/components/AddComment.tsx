@@ -75,8 +75,8 @@ const AddComment = ({
   return (
     <div
       className={`grid grid-cols-2 ${
-        type === 'ADD_REPLY' && 'ml-12'
-      } md:grid-cols-[32px_auto_100px] items-center md:items-start bg-neutralWhite m-4 p-4 mt-4`}
+        type === 'ADD_REPLY' && 'ml-4 md:ml-8'
+      } md:grid-cols-[32px_auto_100px] items-center md:items-start bg-neutralWhite rounded-md m-4 p-4 mt-4`}
     >
       <TextArea
         content={content}
@@ -84,7 +84,11 @@ const AddComment = ({
         customClass='md:mx-4'
       />
 
-      <img src={image.png} alt={username} className='h-8 md:order-first' />
+      <img
+        src={`${process.env.PUBLIC_URL}/${image.png}`}
+        alt={username}
+        className='h-8 md:order-first'
+      />
       <Button
         bgColor='bg-primaryModerateBlue hover:opacity-30'
         innerText={`${type === 'ADD_COMMENT' ? 'SEND' : 'REPLY'}`}

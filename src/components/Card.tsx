@@ -45,8 +45,8 @@ const Card = ({ comment, isReply }: Props) => {
 
   return (
     <div
-      className={`grid grid-cols-2 bg-neutralWhite mx-4 mb-4 p-4 ${
-        isReply && 'ml-12'
+      className={`grid grid-cols-2 bg-neutralWhite rounded-md mx-4 mb-4 p-4 ${
+        isReply && 'ml-4 md:ml-8'
       } md:grid-cols-[70px_auto_100px] md:auto_auto_auto`}
     >
       <UserDetails comment={comment} username={username} />

@@ -16,9 +16,9 @@ const UserDetails = ({ comment, username }: props) => {
   }
 
   return (
-    <div className='col-span-2 flex justify-start items-center gap-x-4 mb-4 mr-8 md:col-start-2 md:col-end-3 md:mb-0'>
+    <div className='col-span-2 flex justify-start items-center gap-x-4 mb-4 md:mr-8 md:col-start-2 md:col-end-3 md:mb-0'>
       <img
-        src={comment.user.image.png}
+        src={`${process.env.PUBLIC_URL}/${comment.user.image.png}`}
         alt={comment.user.username}
         className='h-8'
       />
