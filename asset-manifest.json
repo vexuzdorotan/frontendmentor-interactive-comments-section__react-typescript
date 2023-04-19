@@ -1,13 +1,15 @@
 {
   "files": {
-    "main.css": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.34e41052.css",
-    "main.js": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.2ea1c346.js",
+    "main.css": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.7465f313.css",
+    "main.js": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.938d44d9.js",
+    "static/js/87.7a7341d6.chunk.js": "/frontendmentor-interactive-comments-section__react-typescript/static/js/87.7a7341d6.chunk.js",
     "index.html": "/frontendmentor-interactive-comments-section__react-typescript/index.html",
-    "main.34e41052.css.map": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.34e41052.css.map",
-    "main.2ea1c346.js.map": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.2ea1c346.js.map"
+    "main.7465f313.css.map": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.7465f313.css.map",
+    "main.938d44d9.js.map": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.938d44d9.js.map",
+    "87.7a7341d6.chunk.js.map": "/frontendmentor-interactive-comments-section__react-typescript/static/js/87.7a7341d6.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.34e41052.css",
-    "static/js/main.2ea1c346.js"
+    "static/css/main.7465f313.css",
+    "static/js/main.938d44d9.js"
   ]
 }
