@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.34e41052.css",
-    "main.js": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.52bf1535.js",
+    "main.js": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.2ea1c346.js",
     "index.html": "/frontendmentor-interactive-comments-section__react-typescript/index.html",
     "main.34e41052.css.map": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.34e41052.css.map",
-    "main.52bf1535.js.map": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.52bf1535.js.map"
+    "main.2ea1c346.js.map": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.2ea1c346.js.map"
   },
   "entrypoints": [
     "static/css/main.34e41052.css",
-    "static/js/main.52bf1535.js"
+    "static/js/main.2ea1c346.js"
   ]
 }
