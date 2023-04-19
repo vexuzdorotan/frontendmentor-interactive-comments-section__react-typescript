@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/css/main.25f00704.css",
-    "main.js": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/js/main.ef957454.js",
-    "index.html": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/index.html",
-    "main.25f00704.css.map": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/css/main.25f00704.css.map",
-    "main.ef957454.js.map": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/js/main.ef957454.js.map"
+    "main.css": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.25f00704.css",
+    "main.js": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.fe460719.js",
+    "index.html": "/frontendmentor-interactive-comments-section__react-typescript/index.html",
+    "main.25f00704.css.map": "/frontendmentor-interactive-comments-section__react-typescript/static/css/main.25f00704.css.map",
+    "main.fe460719.js.map": "/frontendmentor-interactive-comments-section__react-typescript/static/js/main.fe460719.js.map"
   },
   "entrypoints": [
     "static/css/main.25f00704.css",
-    "static/js/main.ef957454.js"
+    "static/js/main.fe460719.js"
   ]
 }
