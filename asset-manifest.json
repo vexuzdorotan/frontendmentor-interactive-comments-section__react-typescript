@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/css/main.25f00704.css",
-    "main.js": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/js/main.2df790df.js",
+    "main.js": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/js/main.ef957454.js",
     "index.html": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/index.html",
     "main.25f00704.css.map": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/css/main.25f00704.css.map",
-    "main.2df790df.js.map": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/js/main.2df790df.js.map"
+    "main.ef957454.js.map": "/vexuzdorotan/frontendmentor-interactive-comments-section__react-typescript/static/js/main.ef957454.js.map"
   },
   "entrypoints": [
     "static/css/main.25f00704.css",
-    "static/js/main.2df790df.js"
+    "static/js/main.ef957454.js"
   ]
 }
