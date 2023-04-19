@@ -81,20 +81,21 @@ const AddComment = ({
       <TextArea
         content={content}
         setContent={setContent}
-        customClass='md:mx-4'
+        customClass='md:ml-6 md:mr-4'
       />
 
       <img
         src={`${process.env.PUBLIC_URL}/${image.png}`}
         alt={username}
-        className='h-8 md:order-first'
+        className='max-w-none h-10 md:order-first'
       />
       <Button
         bgColor='bg-primaryModerateBlue hover:opacity-30'
         innerText={`${type === 'ADD_COMMENT' ? 'SEND' : 'REPLY'}`}
-        customClassName={`ml-auto${!content ? ' opacity-30' : ''}`}
         onClick={handleAddComment}
-        disabled={!content}
+        customClassName='ml-auto'
+        // customClassName={`ml-auto${!content ? ' opacity-30' : ''}`}
+        // disabled={!content}
       />
     </div>
   )

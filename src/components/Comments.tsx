@@ -11,7 +11,14 @@ const Comments = () => {
   const { comments, currentReplyId } = useContextComments() as ICommentContext
 
   return (
-    <div className='container mx-auto lg:px-60'>
+    <div className='container mx-auto md:px-60' role='main'>
+      <h1
+        className='text-neutralVeryLightGray text-center'
+        aria-label='hidden header'
+      >
+        Interactive Comments Section
+      </h1>
+
       {comments.map((comment) => {
         const { id: parentId, replies } = comment
         const repliesLength = comment.replies.length
@@ -21,7 +28,7 @@ const Comments = () => {
           <Fragment key={comment.id}>
             <Card comment={comment} isReply={false} />
 
-            <div className='ml-4 md:ml-12 border-l-2 border-neutral-200'>
+            <div className='ml-4 md:ml-12 border-l-2 border-neutralLightGray'>
               {currentReplyId === comment.id && (
                 <AddComment
                   type='ADD_REPLY'

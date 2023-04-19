@@ -100,9 +100,9 @@ const ModifyOrReply = ({ comment, username, isEdit, setIsEdit }: props) => {
         contentLabel='Delete Modal'
         ariaHideApp={false}
       >
-        <h1 className='text-xl font-semibold text-neutralDarkBlue mb-4'>
+        <p className='text-xl font-semibold text-neutralDarkBlue mb-4'>
           Delete comment
-        </h1>
+        </p>
 
         <p className='text-neutralDarkBlue mb-4'>
           Are you sure you want to delete this comment? This will remove the

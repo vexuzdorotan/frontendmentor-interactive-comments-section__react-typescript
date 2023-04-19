@@ -19,10 +19,10 @@ const UserDetails = ({ comment, username }: props) => {
     <div className='col-span-2 flex justify-start items-center gap-x-4 mb-4 md:mr-8 md:col-start-2 md:col-end-3 md:mb-0'>
       <img
         src={`${process.env.PUBLIC_URL}/${comment.user.image.png}`}
-        alt={comment.user.username}
+        alt={`Avatar: ${comment.user.username}`}
         className='h-8'
       />
-      <p className='font-bold'>{comment.user.username}</p>
+      <p className='font-bold text-neutralDarkBlue'>{comment.user.username}</p>
       {comment.user.username === username && (
         <div className='w-10 bg-primaryModerateBlue text-neutralWhite text-sm text-center'>
           you
